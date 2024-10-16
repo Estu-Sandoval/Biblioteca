@@ -19,34 +19,44 @@ export class Biblioteca{
     // Presta un libro
     lendBook(titulo){
         let libroEncontrado = this.#libros.find(
-            (libro,indice) => {
-                libro.titulo == titulo;
-                this.#libros.slice(indice,1);
-            }
+            libro => libro.titulo === titulo
         )
 
         if(libroEncontrado){
-            this.#prestados.push(libroEncontrado)
+            alert(`El libro "${libroEncontrado.titulo}" fue prestado con éxito"`);
+            this.#libros.splice(this.#libros.indexOf(libroEncontrado),1);
+            this.#prestados.push(libroEncontrado);
         }
         else{
-            alert("El libro no se encuentra")
+            alert(`El libro "${titulo}" no se encuentra`);
         }
     }
 
     returnBook(titulo){
         let libroEncontrado = this.#prestados.find(
-            (libro,indice) => {
-                libro.titulo == titulo;
-                this.#prestados.slice(indice,1);
-            }
+            libro => libro.titulo == titulo
         )
 
         if(libroEncontrado){
+            alert(`El libro "${libroEncontrado.titulo}" fue devuelto con éxito"`);
+            this.#prestados.splice(libroEncontrado,1);
             this.#libros.push(libroEncontrado);
             this.#devueltos.push(libroEncontrado);
         }
         else{
-            alert("El libro no se puede devolver porque no se encuetra")
+            alert(`El libro "${titulo}" no se puede devolver porque no se encuentra entre los libros prestados`)
         }
+    }
+
+    get libros(){
+        return this.#libros;
+    }
+
+    get prestados(){
+        return this.#prestados;
+    }
+
+    get devueltos(){
+        return this.#devueltos;
     }
 }
