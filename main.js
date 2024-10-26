@@ -1,12 +1,13 @@
 import { Libro } from "./libro.js";
 import { Biblioteca } from "./biblioteca.js";
+import { datos } from "./datos.js";
 
 const username = localStorage.getItem("username");
 
 const nombreUsuario = document.getElementById("usuario");
 nombreUsuario.textContent = username;
 
-/* localStorage.removeItem("username") */
+const usuario = datos.find((usuario)=> usuario.nombre_usuario === username);
 
 const miBiblioteca = new Biblioteca("Rivadavia");
 
@@ -51,6 +52,16 @@ btnsCancelar.forEach(
     boton.addEventListener("click",cancelar);
   }
 )
+
+if(usuario.rol==="user"){
+  btnNewLibro.classList.add("oculto");
+}
+else{
+  btnNewLibro.classList.remove("oculto");
+}
+
+const btnLogout = document.querySelector(".btn_logout");
+btnLogout.addEventListener("click",cerrarSesion);
 
 const modal = document.querySelector(".modal");
 const contentMain = document.querySelector(".main_content")
@@ -159,7 +170,7 @@ function mostrarPrestarLibro(){
 function prestarLibro(){
   const select = document.getElementById("libro_a_prestar");
   if(select.value!=""){
-    let libro = miBiblioteca.lendBook(parseInt(select.value));
+    let libro = miBiblioteca.lendBook(parseInt(select.value),usuario);
     createRegister("Libro Prestado con éxito",libro);
     select.value = "";
     [...select.children].forEach(
@@ -179,11 +190,11 @@ function prestarLibro(){
 }
 
 function mostrarDevolverLibro(){
-  if(miBiblioteca.prestados.length != 0){
+  if(usuario.libros.length != 0){
     modal.classList.remove("oculto");
     modal.children[2].classList.remove("oculto");
     const select = document.getElementById("libro_a_devolver");
-    miBiblioteca.prestados.forEach(
+    usuario.libros.forEach(
       libro =>{
         const opcion = document.createElement("option");
         opcion.value = libro.id;
@@ -201,7 +212,7 @@ function mostrarDevolverLibro(){
 function devolverLibro(){
   const select = document.getElementById("libro_a_devolver");
   if(select.value!=""){
-    let libro = miBiblioteca.returnBook(parseInt(select.value));
+    let libro = miBiblioteca.returnBook(parseInt(select.value),usuario);
     createRegister("Libro Devuelto con éxito",libro);
     select.value = "";
     [...select.children].forEach(
@@ -247,4 +258,9 @@ function cancelar(event){
       }
     )
   }
+}
+
+function cerrarSesion(){
+  localStorage.removeItem("username");
+  window.location.href = "./index.html";
 }

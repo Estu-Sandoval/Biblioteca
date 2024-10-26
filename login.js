@@ -1,10 +1,4 @@
-import Usuario from "./usuario.js";
-
-let datos = [
-    new Usuario("usuario1","12345"),
-    new Usuario("usuario2","123"),
-    new Usuario("usuario3","5678")
-]
+import { datos } from "./datos.js";
 
 document.getElementById("iniciaSesion").addEventListener("click",(e)=>{
     e.preventDefault()
