@@ -29,38 +29,38 @@ export class Biblioteca {
 
   /**
    * Presta un libro si este se encuentra disponible.
-   * @param {string} titulo - Título del libro a prestar.
+   * @param {number} id - Id del libro a prestar.
    */
-  lendBook(titulo) {
-    let libroEncontrado = this.#libros.find((libro) => libro.titulo === titulo);
+  lendBook(id) {
+    let libroEncontrado = this.#libros.find((libro) => libro.id === id);
 
     if (libroEncontrado) {
       alert(`El libro "${libroEncontrado.titulo}" fue prestado con éxito"`);
       this.#libros.splice(this.#libros.indexOf(libroEncontrado), 1);
       this.#prestados.push(libroEncontrado);
+      return libroEncontrado;
     } else {
-      alert(`El libro "${titulo}" no se encuentra`);
+      alert(`El libro "${id}" no se encuentra`);
     }
   }
 
   /**
    * Devuelve un libro que haya sido prestado.
-   * @param {string} titulo - Título del libro a devolver.
+   * @param {number} id - Id del libro a devolver.
    */
-  returnBook(titulo) {
+  returnBook(id) {
     let libroEncontrado = this.#prestados.find(
-      (libro) => libro.titulo == titulo
+      (libro) => libro.id === id
     );
 
     if (libroEncontrado) {
       alert(`El libro "${libroEncontrado.titulo}" fue devuelto con éxito"`);
-      this.#prestados.splice(libroEncontrado, 1);
+      this.#prestados.splice(this.#prestados.indexOf(libroEncontrado), 1);
       this.#libros.push(libroEncontrado);
       this.#devueltos.push(libroEncontrado);
+      return libroEncontrado;
     } else {
-      alert(
-        `El libro "${titulo}" no se puede devolver porque no se encuentra entre los libros prestados`
-      );
+      alert(`El libro "${id}" no se puede devolver porque no se encuentra entre los libros prestados`);
     }
   }
 

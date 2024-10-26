@@ -4,17 +4,23 @@
     box-sizing: border-box;
 }
 
+.main_content{
+    width: 100%;
+    min-width: 932px;
+}
+
 .container_newBook,.container_lendBook,.container_returnBook{
     display: flex;
     flex-direction: column;
     width: 30%;
+    min-width: 397.2px;
     height: 500px;
     background-color: burlywood;
     border-radius: 30px;
     margin: auto;
     border: 3px solid rgb(255, 174, 68);
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: space-between;
 }
 
 .field{
@@ -53,6 +59,7 @@ label{
 
 input,option{
     font-size: inherit;
+    width: 50%;
     height: 36px;
     text-align: right;
     padding-right: 15px;
@@ -66,6 +73,9 @@ input[type="number"]::-webkit-inner-spin-button{
     display: flex;
     justify-content: center;
     align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100vw;
     height: 100vh;
     z-index: 100;
@@ -97,3 +107,72 @@ input[type="number"]::-webkit-inner-spin-button{
     filter: opacity(0.3);
     pointer-events: none;
 }
+
+.container_msg{
+    background-color: rgb(245, 194, 175);
+    border: 3px solid rgb(255, 68, 0);
+    margin: 30px 0px;
+}
+
+.container_msg > h1{
+    font-size: 30px;
+    font-style: italic;
+    text-align: center;
+    color: green;
+}
+
+select,option{
+    text-align: left;
+    padding:0px 10px;
+}
+
+
+.container_msg  li{
+    margin: 10px 50px;
+    font-size: 24px;
+    font-style: italic;
+    max-width: max-content;
+}
+
+.aspaRoja{
+    width: 6%;
+    align-self: flex-end;
+    margin-right: 2.5%;
+    margin-top: 2.5%;
+}
+
+.aspaRoja:hover{
+    transform: scale(1.08);
+    cursor: pointer;
+}
+
+.login,.transferencia{
+    width: 80%;
+    height: 400px;
+    border: brown solid 3px;
+    border-radius: 50px;
+    background-color: rgb(255, 197, 216);
+    margin: 100px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    box-shadow: grey 10px 10px 10px;
+}
+
+input, select{
+    width: 40%;
+    height: 40px;
+    font-size: 25px;
+}
+
+label{
+    width: 40%;
+    padding: 0 30px;
+    color: brown;
+    font-size: 30px;
+    text-align: left;
+    font-style: italic;
+    font-weight: bold;
+}
+
